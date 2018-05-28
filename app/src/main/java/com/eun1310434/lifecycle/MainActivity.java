@@ -12,7 +12,17 @@
   ○
 
 □ Study
-  ○
+  ○ LifeCycle
+     - To navigate transitions between stages of the activity lifecycle,
+       the Activity class provides a core set of six callbacks
+       : onCreate(), onStart(), onResume(), onPause(), onStop(), and onDestroy().
+         The system invokes each of these callbacks as an activity enters a new state.
+     - Crashing if the user receives a phone call or switches to another app while using your app.
+     - Consuming valuable system resources when the user is not actively using it.
+     - Losing the user's progress if they leave your app and return to it at a later time.
+     - Crashing or losing the user's progress when the screen rotates between
+       landscape and portrait orientation.
+
 =====================================================================*/
 
 
@@ -32,46 +42,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv_log = (TextView) findViewById(R.id.tv_log);
-        tv_log.setText("onCreate()\n");
+        tv_log.setText("1 - onCreate()\n");
         clearMyPrefs();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        tv_log.append("onStart()\n");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        tv_log.append("onRestart()\n");
+        tv_log.append("1.5 - onRestart()\n");
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tv_log.append("2 - onStart()\n");
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        tv_log.append("onResume()\n");
+        tv_log.append("3 - onResume()\n");
         restoreState();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        tv_log.append("onPause()\n");
+        tv_log.append("4 - onPause()\n");
         saveState();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        tv_log.append("onStop()\n");
+        tv_log.append("5 - onStop()\n");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        tv_log.append("onDestroy()\n");
+        tv_log.append("6 - onDestroy()\n");
     }
 
 
